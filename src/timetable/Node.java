@@ -5,9 +5,21 @@ public class Node {
 	ArrayList<Node> map = new ArrayList<Node>();
 	int numberOfStudents;
 	String name;
-	int pos;
 	public String toString(){
 		return "name: " + this.name + " strength: " + this.numberOfStudents;
+	}
+	
+	public static void copyNodes(Node n1, Node n2){
+		n1.name = n2.name;
+		n1.numberOfStudents = n2.numberOfStudents;
+		n1.map = (ArrayList<Node>)n2.map.clone();
+	}
+	
+	public static void swapNodes(Node n1, Node n2){
+		Node temp = new Node();
+		Node.copyNodes(temp, n1);
+		Node.copyNodes(n1,n2);
+		Node.copyNodes(n2, temp);
 	}
 	
 	public static void main(String[] args) {
@@ -19,7 +31,6 @@ public class Node {
 	    Node[] nodearray =  new Node[n];
 	    for (i=0;i<n;i++){
 	        Node temp = new Node();
-	        temp.pos = i;
 	        nodearray[i] = temp;
 	    }
 	    for (i=0;i<n;i++){
@@ -30,7 +41,9 @@ public class Node {
 	                if (i == j){
 	                    temp.numberOfStudents = el;
 	                }
-	                temp.map.add(nodearray[j]);
+	                else{
+	                	temp.map.add(nodearray[j]);
+	                }
 	            }
 	            data[i][j] = el;
 	        }
@@ -44,16 +57,12 @@ public class Node {
 	    for (i=0;i<n;i++){
 	        for (j=0;j<n-1;j++){
 	            if (nodearray[j].numberOfStudents < nodearray[j+1].numberOfStudents){
-	                int tem = nodearray[j].pos;
-	                nodearray[j].pos = nodearray[j+1].pos;
-	                nodearray[j+1].pos = tem;
+	                Node.swapNodes(nodearray[j], nodearray[j+1]);
 	            }
 	        }
 	    }
 	    for (i=0;i<n;i++){
-	    	System.out.println("index is " + nodearray[i].pos);
-	        System.out.println(nodearray[i].numberOfStudents);
-	        System.out.println("no of nodes in common is");
+	        System.out.println("no of nodes in common for "+ nodearray[i].name+" is:");
 	        for(Node obj:nodearray[i].map){
 	        	System.out.println(obj);
 	        }
