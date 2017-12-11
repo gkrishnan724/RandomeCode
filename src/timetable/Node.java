@@ -6,7 +6,7 @@ public class Node {
 	String branch;
 	int color;	//contains the color of the node
 	ArrayList<Node> map = new ArrayList<Node>();	//contains the list of nodes with which a particular node is mapped
-	ArrayList<int> nocolor = new ArrayList<int>();	//contains the list of colors with which a particular node cannot be colored
+	ArrayList<Integer> nocolor = new ArrayList<Integer>();	//contains the list of colors with which a particular node cannot be colored
 	int numberOfStudents;
 	String name;
 	public String toString(){
